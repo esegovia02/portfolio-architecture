@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+:root {
+  /* Base Tones */
+  --background: #fbfaf8;
+  /* Warm Paper */
+  --foreground: #1c1b1a;
+  /* Soft Black */
+
+  /* Atmospheric Accents */
+  --muted: #ce0fa4;
+  /* Soft Olive Gray */
+  --muted-foreground: #737373;
+  --accent-olive: #e1e5e1;
+  --accent-sand: #9c1980;
+  --accent-clay: #d9d5d2;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-olive: var(--accent-olive);
+  --color-accent-sand: var(--accent-sand);
+  --color-accent-clay: var(--accent-clay);
+
+  --font-sans: "UberMove", "Inter", sans-serif;
+  --font-serif: "UberMove", serif;
+}
+
+/* Custom Font Setup - User can drop fonts here */
+/* Uber Move – Custom Sans */
+@font-face {
+  font-family: 'UberMove';
+  src: url('/fonts/UberMove-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UberMove';
+  src: url('/fonts/UberMove-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UberMove';
+  src: url('/fonts/UberMove-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'UberMove';
+  src: url('/fonts/UberMove-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  /*color: #2a2928;*/
+  /* Soft charcoal */
+}
+
+h2 {
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  /*color: #333130;*/
+}
+
+h3,
+h4 {
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  /*color: #3d3b3a;*/
+}
+
+p {
+  font-weight: 300;
+  /*color: #64748b;*/
+  /* Slate-500 - Luminous but readable */
+}
+
+/* Atmospheric Text Utility - Reference Based */
+.text-atmospheric {
+  background: linear-gradient(to right,
+      #e0b47a,
+      #d47481,
+      #c78651);
+  /* Orange-300 via Pink-400 to Purple-500 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gradient-subtle {
+  background: linear-gradient(to right, #4b5563, #6b7280);
+  /* Gray-600 to Gray-500 */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+::selection {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
