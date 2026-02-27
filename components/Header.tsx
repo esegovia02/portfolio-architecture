@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
     const pathname = usePathname();
@@ -12,6 +13,11 @@ export function Header() {
     const [hidden, setHidden] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [showBackToTop, setShowBackToTop] = useState(false);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useMotionValueEvent(scrollY, "change", (latest) => {
         const previous = scrollY.getPrevious() ?? 0;
@@ -22,6 +28,10 @@ export function Header() {
         }
         setShowBackToTop(latest > 300);
     });
+
+
+
+    if (!mounted) return null;
 
     const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -35,7 +45,7 @@ export function Header() {
             >
                 <Link
                     href="/"
-                    className="font-serif font-bold tracking-tight text-gray-900 hover:opacity-80 transition-opacity"
+                    className="font-serif font-bold tracking-tight text-[#474a6b] dark:text-white hover:opacity-80 transition-opacity"
                 >
                     <span className="hidden md:inline text-lg md:text-xl">INICIO</span>
                     <span className="inline md:hidden text-lg">INICIO</span>
@@ -56,13 +66,13 @@ export function Header() {
                 <motion.div
                     layout
                     className={cn(
-                        "pointer-events-auto relative bg-white border border-gray-200 shadow-md overflow-hidden",
+                        "pointer-events-auto relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-md overflow-hidden",
                         mobileMenuOpen ? "rounded-3xl" : "rounded-full"
                     )}
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
                     {/* Desktop Nav */}
-                    <div className="hidden md:flex items-center justify-center px-8 py-3 gap-8 h-12 transition-all hover:bg-gray-100">
+                    <div className="hidden md:flex items-center justify-center px-6 py-2 gap-6 h-12 transition-all">
                         {[
                             { name: "Proyectos", href: "/projects" },
                             { name: "Sobre mí", href: "/about" },
@@ -72,45 +82,50 @@ export function Header() {
                                 key={item.name}
                                 href={item.href}
                                 className={cn(
-                                    "text-xs font-medium tracking-widest uppercase hover:text-black transition-colors text-gray-800",
-                                    pathname === item.href ? "font-bold" : ""
+                                    "text-xs font-medium tracking-widest uppercase hover:text-black dark:hover:text-white transition-colors text-neutral-600 dark:text-neutral-400",
+                                    pathname === item.href ? "font-bold text-black dark:text-white" : ""
                                 )}
                             >
                                 {item.name}
                             </Link>
                         ))}
+                        <div className="w-px h-4 bg-neutral-200 dark:bg-neutral-700 mx-2" />
+                        <ThemeToggle />
                     </div>
 
                     {/* Mobile Nav Toggle & Content */}
                     <div className="md:hidden flex flex-col items-end">
-                        <button
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            className="flex items-center justify-between px-6 py-3 h-12 gap-4 w-full"
-                        >
-                            <span className="text-xs font-medium tracking-widest uppercase text-gray-800">
+                        <div className="flex items-center justify-between px-6 py-2 h-12 gap-4 w-full">
+                            <span className="text-xs font-medium tracking-widest uppercase text-neutral-800 dark:text-neutral-200">
                                 {mobileMenuOpen ? "Cerrar" : "Menu"}
                             </span>
-                            <div className="flex flex-col gap-1 w-4">
-                                <span
-                                    className={cn(
-                                        "w-full h-px bg-gray-800 transition-transform",
-                                        mobileMenuOpen && "rotate-45 translate-y-1.5"
-                                    )}
-                                ></span>
-                                <span
-                                    className={cn(
-                                        "w-full h-px bg-gray-800 transition-opacity",
-                                        mobileMenuOpen && "opacity-0"
-                                    )}
-                                ></span>
-                                <span
-                                    className={cn(
-                                        "w-full h-px bg-gray-800 transition-transform",
-                                        mobileMenuOpen && "-rotate-45 -translate-y-1.5"
-                                    )}
-                                ></span>
+                            <div className="flex items-center gap-4">
+                                <ThemeToggle />
+                                <button
+                                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                    className="flex flex-col gap-1 w-4 ml-2"
+                                >
+                                    <span
+                                        className={cn(
+                                            "w-full h-px bg-neutral-800 dark:bg-neutral-200 transition-transform",
+                                            mobileMenuOpen && "rotate-45 translate-y-1.5"
+                                        )}
+                                    ></span>
+                                    <span
+                                        className={cn(
+                                            "w-full h-px bg-neutral-800 dark:bg-neutral-200 transition-opacity",
+                                            mobileMenuOpen && "opacity-0"
+                                        )}
+                                    ></span>
+                                    <span
+                                        className={cn(
+                                            "w-full h-px bg-neutral-800 dark:bg-neutral-200 transition-transform",
+                                            mobileMenuOpen && "-rotate-45 -translate-y-1.5"
+                                        )}
+                                    ></span>
+                                </button>
                             </div>
-                        </button>
+                        </div>
 
                         <AnimatePresence>
                             {mobileMenuOpen && (
@@ -130,8 +145,8 @@ export function Header() {
                                             href={item.href}
                                             onClick={() => setMobileMenuOpen(false)}
                                             className={cn(
-                                                "text-sm font-medium tracking-widest uppercase hover:text-black transition-colors text-gray-800 py-2",
-                                                pathname === item.href ? "font-bold" : ""
+                                                "text-sm font-medium tracking-widest uppercase hover:text-black dark:hover:text-white transition-colors text-neutral-600 dark:text-neutral-400 py-2",
+                                                pathname === item.href ? "font-bold text-black dark:text-white" : ""
                                             )}
                                         >
                                             {item.name}

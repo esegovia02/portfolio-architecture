@@ -30,9 +30,18 @@ export function BackToTop() {
             initial={{ opacity: 0, y: 20 }}
             animate={controls}
             onClick={scrollToTop}
-            className={`fixed bottom-8 right-8 z-50 p-4 rounded-full bg-background/50 backdrop-blur-md border border-neutral-200/50 shadow-sm hover:bg-background/80 transition-colors ${!isVisible ? 'pointer-events-none' : ''}`}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.92 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            className={`fixed bottom-8 right-8 z-50 p-4 rounded-full 
+    bg-background/50 backdrop-blur-md 
+    border border-neutral-200/50 dark:border-white/10 
+    shadow-sm hover:bg-background/80 
+    transition-colors duration-300
+    cursor-pointer
+    ${!isVisible ? 'pointer-events-none' : ''}`}
         >
-            <ArrowUp className="w-5 h-5 text-neutral-600" />
+            <ArrowUp className="w-5 h-5 text-neutral-600 dark:text-neutral-400" />
         </motion.button>
     );
 }

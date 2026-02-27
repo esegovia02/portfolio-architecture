@@ -1,7 +1,7 @@
 import { projects } from "@/lib/data";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ArrowRight } from "lucide-react";
 import { BackToTop } from "@/components/BackToTop";
 import Image from "next/image";
 
@@ -24,119 +24,194 @@ export default async function ProjectDetails({ params }: ProjectDetailsProps) {
     }
 
     return (
-        <div className="bg-background min-h-screen">
+        <div className="bg-[#111] dark:bg-black min-h-screen relative">
             <BackToTop />
-            {/* Immersive Hero Image */}
-            <div className="relative w-full h-screen">
-                <Image
-                    src={project.coverImage}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                    priority
-                />
+
+            {/* Hero */}
+            <section className="sticky top-0 h-[80vh] w-full flex flex-col justify-center z-0 overflow-hidden">
+
+                {/* Background image */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src={project.coverImage}
+                        alt={project.title}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                </div>
+
                 <div className="absolute inset-0 bg-black/10" />
 
-                <div className="absolute bottom-12 left-6 md:left-12 text-white">
-                    <h1 className="text-5xl md:text-8xl font-serif font-bold tracking-tight mb-4">{project.title}</h1>
-                    <p className="text-lg md:text-xl font-light tracking-wide opacity-90">{project.location} — {project.year}</p>
+                {/* Content LEFT ALIGNED */}
+                <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col items-start justify-center text-left h-full px-6 md:px-12">
+
+                    <span className="block text-xs md:text-sm uppercase tracking-[0.3em] font-sans mb-4 text-white/80 font-bold opacity-90">
+                        {project.category}
+                    </span>
+
+                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif font-medium tracking-tighter mb-4 text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.35)]">
+                        {project.title}
+                    </h1>
+
+                    <p className="text-xl md:text-3xl font-light tracking-wide text-white/90">
+                        {project.location} — {project.year}
+                    </p>
+
                 </div>
-            </div>
+            </section>
 
-            <div className="container mx-auto px-6 md:px-12 py-24">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-16">
+            {/* Main Content */}
+            <div className="relative z-10 bg-[#F2F0EB] dark:bg-neutral-950 rounded-t-[2.5rem] md:rounded-t-[3.5rem] w-full -mt-32 min-h-screen transition-colors duration-500 shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
 
-                    {/* Sticky Sidebar Info */}
-                    <div className="md:col-span-4 relative order-2 md:order-1">
-                        <div className="md:sticky md:top-32 space-y-12 bg-background/50 backdrop-blur-md p-8 rounded-xl md:bg-transparent md:backdrop-blur-none md:p-0">
-                            <Link href="/projects" className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-500 hover:text-neutral-900 transition-colors">
-                                <ArrowLeft className="w-4 h-4" /> Todos
+                <div className="container mx-auto px-6 md:px-12 py-24 md:py-32">
+
+                    <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24">
+
+                        {/* Sidebar */}
+                        <div className="md:col-span-4 relative order-2 md:order-1">
+
+                            <div className="md:sticky md:top-32 space-y-12 pb-12">
+
+                                {/* VOLVER — no blue box */}
+                                <Link
+                                    href="/projects"
+                                    className="inline-flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-[#555BD9] dark:text-white hover:opacity-60 transition-opacity group"
+                                >
+                                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                                    VOLVER
+                                </Link>
+
+                                {/* Project info */}
+                                <div className="space-y-8 pl-6 border-l border-[#555BD9] dark:border-[#EDF24B]/50">
+
+                                    <div className="flex flex-col">
+                                        <span className="text-xs uppercase tracking-[0.2em] font-sans text-[#474a6b] dark:text-white font-bold mb-2">
+                                            Categoría
+                                        </span>
+                                        <span className="text-xl md:text-2xl font-serif text-[#555BD9] dark:text-white">
+                                            {project.category}
+                                        </span>
+                                    </div>
+
+                                    <div className="flex flex-col">
+                                        <span className="text-xs uppercase tracking-[0.2em] font-sans text-[#474a6b] dark:text-white font-bold mb-2">
+                                            Ubicación
+                                        </span>
+                                        <span className="text-xl md:text-2xl font-serif text-[#555BD9] dark:text-white">
+                                            {project.location}
+                                        </span>
+                                    </div>
+
+                                    <div className="flex flex-col">
+                                        <span className="text-xs uppercase tracking-[0.2em] font-sans text-[#474a6b] dark:text-white font-bold mb-2">
+                                            Año
+                                        </span>
+                                        <span className="text-xl md:text-2xl font-serif text-[#555BD9] dark:text-white">
+                                            {project.year}
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                                {/* Explore button */}
+                                <div className="pt-4">
+                                    <Link
+                                        href="#"
+                                        className="inline-flex items-center gap-3 px-6 py-4 text-sm uppercase tracking-[0.2em] text-[#555BD9] dark:text-black bg-[#EDF24B] hover:bg-[#e0e740] transition-colors group font-regular"
+                                    >
+                                        EXPLORAR PROYECTO
+                                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                    </Link>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {/* Content */}
+                        <div className="md:col-span-8 space-y-24 order-1 md:order-2">
+
+                            <div className="max-w-3xl">
+
+                                <p className="text-3xl md:text-5xl font-serif font-medium tracking-tighter leading-[1.1] text-[#555BD9] dark:text-white mb-12">
+                                    {project.description}
+                                </p>
+
+                                <div className="text-lg md:text-xl font-light tracking-wide leading-relaxed text-[#474a6b] dark:text-white/70 space-y-8">
+
+                                    <p>
+                                        Conceptualmente, el proyecto navega la tensión entre la permanencia y lo efímero.
+                                        La elección de materiales articula un diálogo entre masa y ligereza.
+                                    </p>
+
+                                    <p>
+                                        La secuencia espacial está diseñada como una narrativa progresiva,
+                                        revelando relaciones entre interior, exterior y luz.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            {/* Gallery */}
+                            <div className="space-y-12">
+
+                                {project.images[0] && (
+                                    <div className="aspect-[16/9] w-full relative overflow-hidden group">
+                                        <Image
+                                            src={project.images[0]}
+                                            alt=""
+                                            fill
+                                            className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                        />
+                                    </div>
+                                )}
+
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+
+                                    {project.images[1] && (
+                                        <div className="aspect-[3/4] relative overflow-hidden group">
+                                            <Image
+                                                src={project.images[1]}
+                                                alt=""
+                                                fill
+                                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                            />
+                                        </div>
+                                    )}
+
+                                    {project.images[2] && (
+                                        <div className="aspect-[3/4] relative overflow-hidden group">
+                                            <Image
+                                                src={project.images[2]}
+                                                alt=""
+                                                fill
+                                                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                            />
+                                        </div>
+                                    )}
+
+                                </div>
+
+                            </div>
+
+                            <Link
+                                href="/projects"
+                                className="inline-flex items-center gap-3 text-sm uppercase tracking-[0.2em] text-[#555BD9] dark:text-white hover:opacity-60 transition-opacity group"
+                            >
+                                VER ARCHIVO
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </Link>
 
-                            <div className="space-y-8">
-                                <div>
-                                    <span className="block text-xs uppercase tracking-widest text-neutral-400 mb-2">Categoría</span>
-                                    <span className="text-xl font-serif">{project.category}</span>
-                                </div>
-                                <div>
-                                    <span className="block text-xs uppercase tracking-widest text-neutral-400 mb-2">Ubicación</span>
-                                    <span className="text-xl font-serif">{project.location}</span>
-                                </div>
-                                <div>
-                                    <span className="block text-xs uppercase tracking-widest text-neutral-400 mb-2">Año</span>
-                                    <span className="text-xl font-serif">{project.year}</span>
-                                </div>
-                            </div>
                         </div>
+
                     </div>
 
-                    {/* Content & Gallery */}
-                    <div className="md:col-span-8 space-y-24 order-1 md:order-2">
-                        <div className="prose prose-lg prose-neutral max-w-none bg-background/30 backdrop-blur-sm p-6 md:p-0 rounded-xl md:bg-transparent">
-                            <p className="text-2xl md:text-3xl font-serif leading-relaxed text-neutral-900 mb-12">
-                                {project.description}
-                            </p>
-                            <div className="text-neutral-600 font-light leading-loose space-y-6">
-                                <p>
-                                    Conceptualmente, el proyecto navega la tensión entre la permanencia y lo efímero.
-                                    La elección de materiales—hormigón crudo frente a madera suave—articula este diálogo,
-                                    creando una experiencia sensorial que evoluciona con el paso de la luz a lo largo del día.
-                                </p>
-                                <p>
-                                    La secuencia espacial está coreografiada para revelar vistas gradualmente, negando la gratificación instantánea
-                                    a favor de un viaje de descubrimiento. Los umbrales se engrosan, creando momentos de pausa
-                                    que enmarcan la transición entre los dominios público y privado.
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Gallery Images */}
-                        <div className="space-y-12">
-                            {project.images[0] && (
-                                <div className="aspect-[16/9] w-full relative bg-neutral-100">
-                                    <Image
-                                        src={project.images[0]}
-                                        alt={`${project.title} detail 1`}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                            )}
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {project.images[1] && (
-                                    <div className="aspect-[3/4] relative bg-neutral-100">
-                                        <Image
-                                            src={project.images[1]}
-                                            alt={`${project.title} detail 2`}
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                )}
-                                {project.images[2] && (
-                                    <div className="aspect-[3/4] relative bg-neutral-100">
-                                        <Image
-                                            src={project.images[2]}
-                                            alt={`${project.title} detail 3`}
-                                            fill
-                                            className="object-cover"
-                                        />
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
                 </div>
+
             </div>
 
-            {/* Next Project Teaser (Mockup) */}
-            <div className="border-t border-neutral-200 py-32 bg-neutral-50 flex flex-col items-center justify-center text-center">
-                <span className="text-xs uppercase tracking-widest text-neutral-400 mb-4">Siguiente Proyecto</span>
-                <Link href="/projects" className="text-4xl md:text-6xl font-serif font-bold hover:opacity-50 transition-opacity">
-                    Título del Proyecto
-                </Link>
-            </div>
         </div>
     );
 }

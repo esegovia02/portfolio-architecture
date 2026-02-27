@@ -1,19 +1,66 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 :root {
   /* Base Tones */
-  --background: #fbfaf8;
-  /* Warm Paper */
-  --foreground: #1c1b1a;
-  /* Soft Black */
+  --background: #F2F0EB;
+  --foreground: #474a6b;
+  /* Mapped to slightly darker neutral body text */
 
   /* Atmospheric Accents */
-  --muted: #ce0fa4;
-  /* Soft Olive Gray */
-  --muted-foreground: #737373;
-  --accent-olive: #e1e5e1;
-  --accent-sand: #9c1980;
-  --accent-clay: #d9d5d2;
+  --muted: #555BD9;
+  --muted-foreground: #6a6d91;
+  --accent-olive: #e2dfda;
+  --accent-sand: #EDF24B;
+  --accent-clay: #d6d3ce;
+
+  /* OVERRIDES for Light Mode Theme to apply colors consistently */
+  --color-white: #F2F0EB;
+  --color-neutral-50: #ebe9e4;
+  --color-neutral-100: #e2dfda;
+  --color-neutral-200: #d6d3ce;
+  --color-neutral-300: #c1bec4;
+  --color-neutral-400: #8285aa;
+  --color-neutral-50: #f4f3ed;
+  --color-neutral-500: #6a6d91;
+  --color-neutral-600: #474a6b;
+  /* Body text derived from #555BD9 */
+  --color-neutral-700: #3b3e5c;
+  --color-neutral-800: #555BD9;
+  /* Secondary headings */
+  --color-neutral-900: #555BD9;
+  /* Primary headings, Links, primary elements */
+  --color-neutral-950: #4046b0;
+  /* Darker variant for hovers */
+  --color-black: #555BD9;
+  /* Map explicit black usage to primary brand color */
+}
+
+.dark {
+  /* Dark Mode Palette */
+  --background: #0a0a0a;
+  --foreground: #ededed;
+
+  --muted: #a3a3a3;
+  --muted-foreground: #a1a1aa;
+  --accent-olive: #262626;
+  --accent-sand: #be185d;
+  --accent-clay: #404040;
+
+  /* Re-set dark colors so dark mode is preserved */
+  --color-white: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e5e5e5;
+  --color-neutral-300: #d4d4d4;
+  --color-neutral-400: #a3a3a3;
+  --color-neutral-500: #737373;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-800: #262626;
+  --color-neutral-900: #171717;
+  --color-neutral-950: #0a0a0a;
 }
 
 @theme inline {
@@ -63,6 +110,14 @@
   font-display: swap;
 }
 
+.font-serif {
+  font-family: var(--font-serif), serif;
+}
+
+.font-display {
+  font-family: var(--font-display), sans-serif;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -102,10 +157,10 @@ p {
 /* Atmospheric Text Utility - Reference Based */
 .text-atmospheric {
   background: linear-gradient(to right,
-      #e0b47a,
-      #d47481,
-      #c78651);
-  /* Orange-300 via Pink-400 to Purple-500 */
+      #555BD9,
+      #3f46a8,
+      #555BD9);
+  /* Primary brand gradient */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -135,4 +190,9 @@ p {
   /* IE and Edge */
   scrollbar-width: none;
   /* Firefox */
+}
+
+/* Specific architectural quote font restriction */
+.about-quote {
+  font-family: var(--font-antigravity);
 }

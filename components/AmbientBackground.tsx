@@ -12,10 +12,10 @@ export function AmbientBackground() {
             {/* Micro color accents */}
             <div className="absolute inset-0">
                 {/* Blue micro spot */}
-                <div className="absolute top-[14%] left-[5%] w-[48px] h-[48px] md:w-[180px] md:h-[180px] rounded-full bg-blue-200/85 blur-[45px]" />
+                <div className="absolute top-[14%] left-[5%] w-[48px] h-[48px] md:w-[180px] md:h-[180px] rounded-full bg-blue-200/5 blur-[85px]" />
 
                 {/* Rose micro spot */}
-                <div className="absolute top-[28%] right-[14%] w-[42px] h-[42px] md:w-[180px] md:h-[180px] rounded-full bg-rose-200/95 blur-[55px]" />
+                <div className="absolute top-[28%] right-[14%] w-[42px] h-[42px] md:w-[180px] md:h-[180px] rounded-full bg-rose-200/3 blur-[55px]" />
 
                 {/* Lilac micro spot */}
                 <div className="absolute bottom-[20%] left-[48%] w-[36px] h-[36px] md:w-[170px] md:h-[170px] rounded-full bg-purple-200/65 blur-[45px]" />
